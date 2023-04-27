@@ -15,6 +15,10 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
 
+    public OrderService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
     public Boolean addOrder(Order order) {
 
         Optional<Order> optOrder = getOrder(order.getId());

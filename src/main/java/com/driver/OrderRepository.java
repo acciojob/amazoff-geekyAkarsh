@@ -9,11 +9,19 @@ import java.util.*;
 @Repository
 public class OrderRepository {
 
-    private Map<String,Order> orderMap = new HashMap<>();
-    private Map<String,DeliveryPartner> deliveryPartnerMap = new HashMap<>();
-    private Map<String,String> orderToPartnerMap = new HashMap<>();
-    private Map<String, List<String>> partnerToOrderMap = new HashMap<>();
+    private Map<String,Order> orderMap;
+    private Map<String,DeliveryPartner> deliveryPartnerMap;
+    private Map<String,String> orderToPartnerMap;
+    private Map<String, List<String>> partnerToOrderMap;
 
+    public OrderRepository() {
+
+        this.orderMap = new HashMap<>();
+        this.deliveryPartnerMap = new HashMap<>();
+        this.orderToPartnerMap = new HashMap<>();
+        this.partnerToOrderMap = new HashMap<>();
+
+    }
 
     public void addOrder(Order order) {
 
