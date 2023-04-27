@@ -74,6 +74,7 @@ public class OrderRepository {
 
     public Optional<List<String>> getAllOrders() {
 
+        if(orderMap.size() == 0) return Optional.of(new ArrayList<>());
         return Optional.of(new ArrayList<>(orderMap.keySet()));
     }
 
@@ -86,6 +87,7 @@ public class OrderRepository {
 
     public Optional<List<String>> getAssignedOrders() {
 
+        if(orderToPartnerMap.size() == 0) return Optional.of(new ArrayList<>());
         return Optional.of(new ArrayList<>(orderToPartnerMap.keySet()));
     }
 

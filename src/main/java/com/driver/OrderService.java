@@ -1,5 +1,6 @@
 package com.driver;
 
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,9 @@ public class OrderService {
 
     public Optional<Order> getOrder(String id) {
 
-        return orderRepository.getOrder(id);
+        Optional<Order> optionalOrder = orderRepository.getOrder(id);
+        if(optionalOrder.isPresent()) return optionalOrder;
+        return Optional.empty();
     }
 
     public Boolean addPartner(String partnerId) {
@@ -114,9 +117,12 @@ public class OrderService {
 
     public Boolean deletePartnerById(String partnerId) {
 
-        List<String> allOrders = getOrdersByPartnerId(partnerId).get();
+        Optional<List<String>> orders = getOrdersByPartnerId(partnerId);
+
         orderRepository.deletePartner(partnerId);
 
+        if(orders.isEmpty()) return true;
+        List<String> allOrders = orders.get();
         for(String orderId : allOrders){
         orderRepository.removeOrderPartnerMapping(orderId);
         }

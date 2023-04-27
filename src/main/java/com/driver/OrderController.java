@@ -23,6 +23,7 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+
     @PostMapping("/add-order")
     public ResponseEntity<String> addOrder(@RequestBody Order order){
 
@@ -60,7 +61,9 @@ public class OrderController {
     public ResponseEntity<DeliveryPartner> getPartnerById(@PathVariable String partnerId){
 
         Optional<DeliveryPartner> optionalDeliveryPartner = orderService.getPartner(partnerId);
-        DeliveryPartner deliveryPartner = optionalDeliveryPartner.get();
+        DeliveryPartner deliveryPartner = null;
+        if(optionalDeliveryPartner.isPresent())
+            deliveryPartner = optionalDeliveryPartner.get();
         //deliveryPartner should contain the value given by partnerId
 
         return new ResponseEntity<>(deliveryPartner, HttpStatus.CREATED);
@@ -70,7 +73,9 @@ public class OrderController {
     public ResponseEntity<Integer> getOrderCountByPartnerId(@PathVariable String partnerId){
 
         Optional<Integer> optionalOrderCount = orderService.getOrderCountByPartnerId(partnerId);
-        Integer orderCount = optionalOrderCount.get();
+        Integer orderCount =0;
+        if(optionalOrderCount.isPresent())
+            orderCount = optionalOrderCount.get();
 
         //orderCount should denote the orders given by a partner-id
 
@@ -101,7 +106,9 @@ public class OrderController {
     @GetMapping("/get-count-of-unassigned-orders")
     public ResponseEntity<Integer> getCountOfUnassignedOrders(){
         Optional<Integer> optionalCountUnOrders = orderService.getCountOfUnassignedOrders();
-        Integer countOfOrders = optionalCountUnOrders.get();
+        Integer countOfOrders = 0;
+        if(optionalCountUnOrders.isPresent())
+            countOfOrders = optionalCountUnOrders.get();
 
         //Count of orders that have not been assigned to any DeliveryPartner
 
