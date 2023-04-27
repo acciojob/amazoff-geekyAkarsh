@@ -15,6 +15,9 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
 
+    public OrderService() {
+    }
+
     public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
