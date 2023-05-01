@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.awt.font.OpenType;
 import java.util.*;
 
-//@Repository
+@Repository
 public class OrderRepository {
 
     private Map<String,Order> orderMap;
