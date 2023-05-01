@@ -16,6 +16,7 @@ public class OrderService {
     OrderRepository orderRepository;
 
     public OrderService() {
+        this.orderRepository = new OrderRepository();
     }
 
     public OrderService(OrderRepository orderRepository) {
