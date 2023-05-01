@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-@Service
+//@Service
 public class OrderService {
 
-    @Autowired
-    OrderRepository orderRepository;
+    //@Autowired
+    OrderRepository orderRepository = new OrderRepository();
 
     public OrderService() {
     }
