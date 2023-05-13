@@ -1,5 +1,6 @@
 package com.driver;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,7 +93,10 @@ public class OrderController {
     public ResponseEntity<List<String>> getOrdersByPartnerId(@PathVariable String partnerId){
 
         Optional<List<String>> optionalOrders = orderService.getOrdersByPartnerId(partnerId);
-        List<String> orders = optionalOrders.get();
+        List<String> orders = new ArrayList<>();
+        if(optionalOrders.isPresent()){
+            orders = optionalOrders.get();
+        }
 
         //orders should contain a list of orders by PartnerId
 

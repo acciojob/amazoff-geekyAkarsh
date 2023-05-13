@@ -59,6 +59,7 @@ public class OrderService {
 
         if(optionalOrder.isPresent() && optionalDeliveryPartner.isPresent()){
             orderRepository.addOrderPartnerPair(orderId,partnerId);
+            optionalDeliveryPartner.get().setNumberOfOrders(optionalDeliveryPartner.get().getNumberOfOrders()+1);
         }
         return true;
     }
@@ -144,6 +145,13 @@ public class OrderService {
 
         if (Objects.nonNull(partnerId)){
             orderRepository.removeOrderForPartner(partnerId,orderId);
+            Optional<DeliveryPartner> optionalDeliveryPartner = getPartner(partnerId);
+            if(optionalDeliveryPartner.isPresent()){
+                int numOrders = optionalDeliveryPartner.get().getNumberOfOrders();
+                numOrders--;
+                if(numOrders<0) numOrders=0;
+                optionalDeliveryPartner.get().setNumberOfOrders(numOrders);
+            }
         }
 
         return true;
